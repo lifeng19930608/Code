@@ -10,7 +10,7 @@
         android:layout_height="fill_parent"
         android:layout_gravity="center" />
 
-    <com.lifeng.barcodescanner.scanner.view.ViewfinderView
+    <com.lifeng.code.scanner.view.ViewfinderView
         android:id="@+id/capture_viewfinder_view"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
