@@ -1,9 +1,5 @@
 package com.lifeng.barcodescanner.scanner.decode;
 
-import java.util.Hashtable;
-import java.util.Vector;
-
-import android.content.Context;
 import android.graphics.Bitmap;
 
 import com.google.zxing.BarcodeFormat;
@@ -14,14 +10,17 @@ import com.google.zxing.NotFoundException;
 import com.google.zxing.Result;
 import com.google.zxing.common.HybridBinarizer;
 
+import java.util.Hashtable;
+import java.util.Vector;
+
 /**
  * 从bitmap解码
  */
 public class BitmapDecoder {
 
-    MultiFormatReader multiFormatReader;
+    private MultiFormatReader multiFormatReader;
 
-    public BitmapDecoder(Context context) {
+    public BitmapDecoder() {
 
         multiFormatReader = new MultiFormatReader();
 
@@ -44,7 +43,6 @@ public class BitmapDecoder {
 
         // 设置解析配置参数
         multiFormatReader.setHints(hints);
-
     }
 
     /**

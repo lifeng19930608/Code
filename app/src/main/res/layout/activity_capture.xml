@@ -85,7 +85,7 @@
             android:layout_height="40.0dip"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="20.0dip"
-            android:text="@string/cancel"
+            android:text="@string/close"
             android:textSize="14.0sp" />
 
         <Button

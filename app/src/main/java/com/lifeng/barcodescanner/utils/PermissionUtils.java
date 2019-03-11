@@ -2,12 +2,18 @@ package com.lifeng.barcodescanner.utils;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.util.ArrayMap;
+
+import com.lifeng.barcodescanner.R;
 
 /**
  * author : lifeng
@@ -119,5 +125,21 @@ public class PermissionUtils {
 
     public interface Callback {
         void onResult(boolean grant);
+    }
+
+    //没有获取权限之后的操作
+
+    public void showDialog(final Activity activity) {
+        AlertDialog.Builder localBuilder = new AlertDialog.Builder(activity);
+        localBuilder.setTitle("权限申请对话框");
+        localBuilder.setIcon(R.mipmap.ic_launcher);
+        localBuilder.setMessage("为了不影响您的正常使用，请赋予应用必要的权限");
+        localBuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt) {
+                activity.startActivity(new Intent(Settings.ACTION_SETTINGS));
+            }
+        });
+        localBuilder.setCancelable(false).create();
+        localBuilder.show();
     }
 }

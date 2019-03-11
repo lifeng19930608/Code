@@ -19,7 +19,6 @@ public final class OpenCameraInterface {
 	 */
 	public static Camera open() {
 
-
 		int numCameras = Camera.getNumberOfCameras();
 		if (numCameras == 0) {
 			Log.w(TAG, "No cameras!");

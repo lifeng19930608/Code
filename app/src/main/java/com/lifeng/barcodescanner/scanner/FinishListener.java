@@ -10,7 +10,7 @@ public final class FinishListener implements DialogInterface.OnClickListener, Di
 
   private final Activity activityToFinish;
 
-  public FinishListener(Activity activityToFinish) {
+  FinishListener(Activity activityToFinish) {
     this.activityToFinish = activityToFinish;
   }
 

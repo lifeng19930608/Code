@@ -1,5 +1,6 @@
 package com.lifeng.barcodescanner.scanner;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -9,7 +10,7 @@ import android.os.AsyncTask;
 import android.os.BatteryManager;
 import android.util.Log;
 
-import com.lifeng.barcodescanner.scanner.common.Runnable;
+import com.lifeng.barcodescanner.utils.RunnableUtils;
 
 /**
  * Finishes an activity after a period of inactivity if the device is on battery
@@ -48,7 +49,7 @@ final class InactivityTimer {
 	synchronized void onActivity() {
 		cancel();
 		inactivityTask = new InactivityAsyncTask();
-		Runnable.execAsync(inactivityTask);
+		RunnableUtils.execAsync(inactivityTask);
 	}
 
 	public synchronized void onPause() {
@@ -112,8 +113,8 @@ final class InactivityTimer {
 	/**
 	 * 该任务很简单，就是在INACTIVITY_DELAY_MS时间后终结activity
 	 */
-	private final class InactivityAsyncTask extends
-			AsyncTask<Object, Object, Object> {
+	@SuppressLint("StaticFieldLeak")
+	private final class InactivityAsyncTask extends AsyncTask<Object, Object, Object> {
 		@Override
 		protected Object doInBackground(Object... objects) {
 			try {

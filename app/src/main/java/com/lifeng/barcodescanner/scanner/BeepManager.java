@@ -68,7 +68,9 @@ final class BeepManager implements MediaPlayer.OnCompletionListener,
 		if (vibrate) {
 			Vibrator vibrator = (Vibrator) activity
 					.getSystemService(Context.VIBRATOR_SERVICE);
-			vibrator.vibrate(VIBRATE_DURATION);
+			if (vibrator != null) {
+				vibrator.vibrate(VIBRATE_DURATION);
+			}
 		}
 	}
 
@@ -78,7 +80,7 @@ final class BeepManager implements MediaPlayer.OnCompletionListener,
 			// See if sound settings overrides this
 			AudioManager audioService = (AudioManager) activity
 					.getSystemService(Context.AUDIO_SERVICE);
-			if (audioService.getRingerMode() != AudioManager.RINGER_MODE_NORMAL) {
+			if (audioService != null && audioService.getRingerMode() != AudioManager.RINGER_MODE_NORMAL) {
 				shouldPlayBeep = false;
 			}
 		}

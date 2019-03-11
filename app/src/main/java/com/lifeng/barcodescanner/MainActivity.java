@@ -1,12 +1,9 @@
 package com.lifeng.barcodescanner;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.webkit.WebView;
@@ -56,37 +53,14 @@ public class MainActivity extends Activity {
      * 检查必要权限
      */
     private void checkPermission() {
-        PermissionUtils.getInstance().request(this, PermissionUtils.Type.STORAGE, new PermissionUtils.Callback() {
-            @Override
-            public void onResult(boolean grant) {
-                if (!grant) {
-                    showDialog();
-                }
-            }
-        });
         PermissionUtils.getInstance().request(this, PermissionUtils.Type.CAMERA, new PermissionUtils.Callback() {
             @Override
             public void onResult(boolean grant) {
                 if (!grant) {
-                    showDialog();
+                    PermissionUtils.getInstance().showDialog(MainActivity.this);
                 }
             }
         });
-    }
-
-    //弹出授权的对话狂
-    private void showDialog() {
-        AlertDialog.Builder localBuilder = new AlertDialog.Builder(this);
-        localBuilder.setTitle("权限申请对话框");
-        localBuilder.setIcon(R.mipmap.ic_launcher);
-        localBuilder.setMessage("为了不影响您的正常使用，请赋予应用必要的权限");
-        localBuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt) {
-                startActivity(new Intent(Settings.ACTION_SETTINGS));
-            }
-        });
-        localBuilder.setCancelable(false).create();
-        localBuilder.show();
     }
 
     @Override
@@ -94,7 +68,7 @@ public class MainActivity extends Activity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         boolean grant = grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED;
         if (!grant) {
-            showDialog();
+            PermissionUtils.getInstance().showDialog(MainActivity.this);
         }
     }
 }

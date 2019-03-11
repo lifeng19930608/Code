@@ -1,4 +1,4 @@
-package com.lifeng.barcodescanner.scanner.common;
+package com.lifeng.barcodescanner.utils;
 
 import android.os.AsyncTask;
 import android.os.Build;
@@ -6,9 +6,9 @@ import android.os.Build;
 /**
  * 兼容低版本的子线程开启任务
  */
-public class Runnable {
+public class RunnableUtils {
     public static void execAsync(AsyncTask asyncTask) {
-        if (Build.VERSION.SDK_INT >= 11) {
+        if (Build.VERSION.SDK_INT >= 17) {
             asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         } else {
             asyncTask.execute();

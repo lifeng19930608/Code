@@ -7,7 +7,7 @@ public class BitmapLuminanceSource extends LuminanceSource {
 
 	private byte bitmapPixels[];
 
-	protected BitmapLuminanceSource(Bitmap bitmap) {
+	BitmapLuminanceSource(Bitmap bitmap) {
 		super(bitmap.getWidth(), bitmap.getHeight());
 
 		// 首先，要取得该图片的像素数组内容
