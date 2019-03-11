@@ -132,7 +132,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
         private WeakReference<Activity> activityReference;
 
-        public MyHandler(Activity activity) {
+        MyHandler(Activity activity) {
             activityReference = new WeakReference<>(activity);
         }
 
