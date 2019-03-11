@@ -1,33 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.lifeng.barcodescanner.MainActivity">
+    android:background="@color/white"
+    android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_scanner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="二维码扫描" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp">
+
+        <Button
+            android:id="@+id/btn_scanner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:text="扫描二维码"
+            android:textColor="@color/colorAccent" />
+
+        <Button
+            android:id="@+id/btn_create"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:text="二维码生成"
+            android:textColor="@color/colorAccent" />
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/tv_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="扫描的结果："
+        android:textColor="@color/colorPrimary" />
+
+    <ImageView
+        android:id="@+id/iv_create"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/btn_scanner"
-        android:text="扫描的结果：" />
+        android:layout_gravity="center" />
 
     <WebView
         android:id="@+id/wv_result"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/tv_result" />
+        android:layout_height="match_parent" />
 
-</RelativeLayout>
+</LinearLayout>
