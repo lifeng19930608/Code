@@ -480,38 +480,32 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.capture_scan_photo: // 图片识别
-                PermissionUtils.getInstance().request(this, PermissionUtils.Type.STORAGE, new PermissionUtils.Callback() {
-                    @Override
-                    public void onResult(boolean grant) {
-                        if (grant) {
-                            // 打开手机中的相册
-                            Intent innerIntent = new Intent(Intent.ACTION_GET_CONTENT); // "android.intent.action.GET_CONTENT"
-                            innerIntent.setType("image/*");
-                            Intent wrapperIntent = Intent.createChooser(innerIntent, "选择二维码图片");
-                            startActivityForResult(wrapperIntent, REQUEST_CODE);
-                        } else {
-                            PermissionUtils.getInstance().showDialog(CaptureActivity.this);
-                        }
+        if (v.getId() == R.id.capture_scan_photo) {//相册
+            PermissionUtils.getInstance().request(this, PermissionUtils.Type.STORAGE, new PermissionUtils.Callback() {
+                @Override
+                public void onResult(boolean grant) {
+                    if (grant) {
+                        // 打开手机中的相册
+                        Intent innerIntent = new Intent(Intent.ACTION_GET_CONTENT); // "android.intent.action.GET_CONTENT"
+                        innerIntent.setType("image/*");
+                        Intent wrapperIntent = Intent.createChooser(innerIntent, "选择二维码图片");
+                        startActivityForResult(wrapperIntent, REQUEST_CODE);
+                    } else {
+                        PermissionUtils.getInstance().showDialog(CaptureActivity.this);
                     }
-                });
-                break;
-            case R.id.capture_flashlight://是否开启闪光灯
-                if (isFlashlightOpen) {
-                    cameraManager.setTorch(false); // 关闭闪光灯
-                    isFlashlightOpen = false;
-                } else {
-                    cameraManager.setTorch(true); // 打开闪光灯
-                    isFlashlightOpen = true;
                 }
-                break;
-            case R.id.capture_button_cancel:
-                linearLayout_bottom.setVisibility(View.GONE);
-            default:
-                break;
+            });
+        } else if (v.getId() == R.id.capture_flashlight) {
+            if (isFlashlightOpen) {
+                cameraManager.setTorch(false); // 关闭闪光灯
+                isFlashlightOpen = false;
+            } else {
+                cameraManager.setTorch(true); // 打开闪光灯
+                isFlashlightOpen = true;
+            }
+        } else if (v.getId() == R.id.capture_button_cancel) {
+            linearLayout_bottom.setVisibility(View.GONE);
         }
-
     }
 
 }

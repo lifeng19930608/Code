@@ -1,4 +1,4 @@
-package com.lifeng.code;
+package com.scan.demo;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.lifeng.code.CaptureActivity;
 import com.lifeng.code.create.StringToQRCodeListener;
 import com.lifeng.code.create.StringToQRCodeTask;
 import com.lifeng.code.utils.PermissionUtils;
