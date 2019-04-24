@@ -4,7 +4,7 @@
     <string name="create">生成</string>
     <string name="scan_failed">扫描失败</string>
     <string name="bottom_hint">建议与镜头保持10CM距离，尽量避免逆光和阴影</string>
-    <string name="top_hint">将条形码或二维码置于取景框内系统会自动扫描</string>
+    <string name="top_hint">将二维码置于取景框内系统会自动扫描</string>
     <string name="cancel">取消</string>
     <string name="close">关闭</string>
     <string name="msg_camera_framework_bug">抱歉，没有获取该权限，请在安全中心重新授予权限！</string>

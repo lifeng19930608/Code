@@ -17,7 +17,7 @@ import com.lifeng.code.create.StringToQRCodeListener;
 import com.lifeng.code.create.StringToQRCodeTask;
 import com.lifeng.code.utils.PermissionUtils;
 
-import static com.lifeng.code.scanner.config.Config.KEY_DTDA;
+import static com.lifeng.code.scanner.config.Config.KEY_DATA;
 
 public class MainActivity extends Activity implements StringToQRCodeListener, View.OnClickListener {
 
@@ -46,7 +46,7 @@ public class MainActivity extends Activity implements StringToQRCodeListener, Vi
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_DODE && resultCode == RESULT_CODE) {
-            final String message = data.getStringExtra(KEY_DTDA);
+            final String message = data.getStringExtra(KEY_DATA);
             tv_result.setText(String.valueOf("二维码扫描返回的信息为：" + message));
             new Handler(getMainLooper()).postDelayed(new Runnable() {
                 @Override

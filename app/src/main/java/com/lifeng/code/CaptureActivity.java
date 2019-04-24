@@ -41,7 +41,7 @@ import java.lang.ref.WeakReference;
 import java.util.Collection;
 import java.util.Map;
 
-import static com.lifeng.code.scanner.config.Config.KEY_DTDA;
+import static com.lifeng.code.scanner.config.Config.KEY_DATA;
 
 /**
  * 此Activity所做的事：
@@ -145,7 +145,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
                     Toast.makeText(activityReference.get(), "图片解析成功！", Toast.LENGTH_SHORT).show();
                     Intent intent1 = new Intent();
                     Bundle bundle = new Bundle();
-                    bundle.putString(KEY_DTDA, message);
+                    bundle.putString(KEY_DATA, message);
                     intent1.putExtras(bundle);
                     activityReference.get().setResult(100, intent1);
                     new Handler().postDelayed(new Runnable() {
@@ -380,7 +380,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         String message = ResultParser.parseResult(rawResult).toString();
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
-        bundle.putString("data", message);
+        bundle.putString(KEY_DATA, message);
         intent.putExtras(bundle);
         setResult(100, intent);
         new Handler().postDelayed(new Runnable() {
