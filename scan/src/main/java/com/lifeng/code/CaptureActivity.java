@@ -3,12 +3,16 @@ package com.lifeng.code;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.SurfaceHolder;
@@ -25,7 +29,6 @@ import com.google.zxing.Result;
 import com.google.zxing.client.result.ResultParser;
 import com.lifeng.code.scanner.AmbientLightManager;
 import com.lifeng.code.scanner.BeepManager;
-import com.lifeng.code.scanner.FinishListener;
 import com.lifeng.code.scanner.InactivityTimer;
 import com.lifeng.code.scanner.IntentSource;
 import com.lifeng.code.scanner.camera.CameraManager;
@@ -473,8 +476,14 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getString(R.string.app_name));
         builder.setMessage(getString(R.string.msg_camera_framework_bug));
-        builder.setPositiveButton(R.string.button_ok, new FinishListener(this));
-        builder.setOnCancelListener(new FinishListener(this));
+        builder.setPositiveButton(R.string.button_ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(Settings.ACTION_SETTINGS));
+                finish();
+            }
+        });
+        builder.setCancelable(false);
         builder.show();
     }
 
@@ -508,4 +517,16 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        boolean grant = grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED;
+        if (requestCode == PermissionUtils.REQUEST_FOR_STORAGE_PERMISSION) {
+            //打开手机中的相册
+            Intent innerIntent = new Intent(Intent.ACTION_GET_CONTENT); // "android.intent.action.GET_CONTENT"
+            innerIntent.setType("image/*");
+            Intent wrapperIntent = Intent.createChooser(innerIntent, "选择二维码图片");
+            startActivityForResult(wrapperIntent, REQUEST_CODE);
+        }
+    }
 }

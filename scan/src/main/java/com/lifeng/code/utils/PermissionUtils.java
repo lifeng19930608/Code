@@ -24,13 +24,14 @@ import com.lifeng.code.R;
  */
 public class PermissionUtils {
 
-    private static final int REQUEST_FOR_LOCATION_PERMISSION = 1;//定位权限
-    private static final int REQUEST_FOR_STORAGE_PERMISSION = 2;//文件存储权限
-    private static final int REQUEST_FOR_CAMERA_PERMISSION = 3;//相机权限
-    private static final int REQUEST_FOR_AUDIO_PERMISSION = 4;//
+    public static final int REQUEST_FOR_LOCATION_PERMISSION = 1;//定位权限
+    public static final int REQUEST_FOR_STORAGE_PERMISSION = 2;//文件存储权限
+    public static final int REQUEST_FOR_CAMERA_PERMISSION = 3;//相机权限
+    public static final int REQUEST_FOR_AUDIO_PERMISSION = 4;//
 
     private static volatile PermissionUtils instance;
     private ArrayMap<String, Object> callbackPool;
+    private AlertDialog dialog;
 
     private PermissionUtils() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -128,18 +129,25 @@ public class PermissionUtils {
     }
 
     //没有获取权限之后的操作
-
     public void showDialog(final Activity activity) {
-        AlertDialog.Builder localBuilder = new AlertDialog.Builder(activity);
-        localBuilder.setTitle("权限申请对话框");
-        localBuilder.setIcon(R.mipmap.ic_launcher);
-        localBuilder.setMessage("为了不影响您的正常使用，请赋予应用必要的权限");
-        localBuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+        hideDialog();
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle("权限申请对话框");
+        builder.setIcon(R.mipmap.ic_launcher);
+        builder.setMessage("为了不影响您的正常使用，请赋予应用必要的权限");
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt) {
                 activity.startActivity(new Intent(Settings.ACTION_SETTINGS));
             }
         });
-        localBuilder.setCancelable(false).create();
-        localBuilder.show();
+        builder.setCancelable(false);
+        dialog = builder.create();
+        dialog.show();
+    }
+
+    private void hideDialog() {
+        if (dialog != null) {
+            dialog.dismiss();
+        }
     }
 }
