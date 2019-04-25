@@ -521,11 +521,11 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         boolean grant = grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED;
-        if (requestCode == PermissionUtils.REQUEST_FOR_STORAGE_PERMISSION) {
+        if (grant && requestCode == PermissionUtils.REQUEST_FOR_STORAGE_PERMISSION) {
             //打开手机中的相册
-            Intent innerIntent = new Intent(Intent.ACTION_GET_CONTENT); // "android.intent.action.GET_CONTENT"
-            innerIntent.setType("image/*");
-            Intent wrapperIntent = Intent.createChooser(innerIntent, "选择二维码图片");
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("image/*");
+            Intent wrapperIntent = Intent.createChooser(intent, "选择二维码图片");
             startActivityForResult(wrapperIntent, REQUEST_CODE);
         }
     }
